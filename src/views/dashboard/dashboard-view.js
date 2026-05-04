@@ -1,18 +1,18 @@
 import { createBoard } from "../../components/board/board";
 import { createSidebar } from "../../components/sidebar/sidebar";
 import { createTopbar } from "../../components/topbar/topbar";
+import "../dashboard/dashboard-view.css";
 
 export const createDashboard = (element) => {
   element.innerHTML = `
     <aside class="sidebar" id="sidebar">Sidebar</aside>
     <main class="container-main">
       <header>
-        <h1>ToDo</h1>
+      <div class="topbar">
+      </div>
       </header>
 
-      <div class="topbar">
 
-      </div>
       <div class='container-board'>
 
       </div>
@@ -35,7 +35,7 @@ export const createDashboard = (element) => {
   if (!board) {
     throw new Error("No existe board");
   }
+  createSidebar(sidebarAside);
   createBoard(board);
   createTopbar(topbar);
-  createSidebar(sidebarAside);
 };

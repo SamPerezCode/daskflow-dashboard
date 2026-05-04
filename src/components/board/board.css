@@ -1,0 +1,29 @@
+.container-board {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 12px 8px 16px;
+}
+
+.column {
+  flex: 0 0 300px;
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+.column h4 {
+  margin: 0 0 12px;
+  color: var(--text-main);
+  font-size: 16px;
+}
+
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 40px;
+}
