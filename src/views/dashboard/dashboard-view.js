@@ -1,17 +1,21 @@
+import { createBoard } from "../../components/board/board";
 import { createSidebar } from "../../components/sidebar/sidebar";
+import { createTopbar } from "../../components/topbar/topbar";
 
 export const createDashboard = (element) => {
   element.innerHTML = `
     <aside class="sidebar" id="sidebar">Sidebar</aside>
-    <main class="board">
+    <main class="container-main">
       <header>
         <h1>ToDo</h1>
       </header>
 
-      <section class="column" id="todos">ToDo's</section>
-      <section class="column" id="pending">Pendientes</section>
-      <section class="column" id="progress">En progreso</section>
-      <section class="column" id="done">Completado</section>
+      <div class="topbar">
+
+      </div>
+      <div class='container-board'>
+
+      </div>
     </main>
   `;
 
@@ -22,5 +26,16 @@ export const createDashboard = (element) => {
     );
   }
 
+  const topbar = document.querySelector(".topbar");
+  if (!topbar) {
+    throw new Error("No existe el topbar");
+  }
+
+  const board = document.querySelector(".container-board");
+  if (!board) {
+    throw new Error("No existe board");
+  }
+  createBoard(board);
+  createTopbar(topbar);
   createSidebar(sidebarAside);
 };

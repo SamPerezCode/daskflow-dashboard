@@ -1,3 +1,9 @@
+import "../sidebar/sidebar.css";
+
+/**
+ *
+ * @param {HTMLDivElement} element
+ */
 export const createSidebar = (element) => {
   element.innerHTML = `
 
