@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Diseñar layout dark mode",
+      "description": "Crear sidebar, header y columnas del dashboard",
+      "status": "todo",
+      "priority": "alta",
+      "createdAt": "2026-04-30"
+    },
+    {
+      "id": "2",
+      "title": "Crear render dinámico",
+      "description": "Pintar las tareas desde JavaScript usando map",
+      "status": "progress",
+      "priority": "media",
+      "createdAt": "2026-04-30"
+    },
+    {
+      "id": "3",
+      "title": "Guardar tareas en API fake",
+      "description": "Conectar el frontend con json-server usando fetch",
+      "status": "done",
+      "priority": "baja",
+      "createdAt": "2026-04-30"
+    }
+  ]
+}
