@@ -1,63 +1,37 @@
-import "../board/board.css";
-import { createTaskCard } from "../task-card/task-card.js";
+import "./board.css";
+import { createkanbanColumn } from "../kanban-column/kanban-column.js";
 
-export const createBoard = (element) => {
-  element.innerHTML = `
-    <section class="column" id="todos">
-      <h4>ToDo's</h4>
-      <div class="cards-list" id="list-todo"></div>
-    </section>
+export const createBoard = (element, tasks = []) => {
+  element.innerHTML = "";
 
-    <section class="column" id="pending">
-      <h4>Pendientes</h4>
-      <div class="cards-list" id="list-pending"></div>
-    </section>
+  const grouped = {
+    todo: [],
+    pending: [],
+    progress: [],
+    done: [],
+  };
 
-    <section class="column" id="progress">
-      <h4>En progreso</h4>
-      <div class="cards-list" id="list-progress"></div>
-    </section>
-
-    <section class="column" id="done">
-      <h4>Completado</h4>
-      <div class="cards-list" id="list-done"></div>
-    </section>
-  `;
-
-  const todoList = element.querySelector("#list-todo");
-  const pendingList = element.querySelector("#list-pending");
-  const progressList = element.querySelector("#list-progress");
-  const doneList = element.querySelector("#list-done");
-
-  if (!todoList || !pendingList || !progressList || !doneList) {
-    throw new Error("No se encontraron los contenedores de columnas");
+  for (const task of tasks) {
+    const status = task?.status;
+    if (grouped[status]) {
+      grouped[status].push(task);
+    }
   }
 
-  createTaskCard(todoList, {
-    title: "Diseñar layout dark mode",
-    description: "Crear sidebar, topbar y columnas base",
-    createdAt: "Hace 2 días",
-    priority: "alta",
-  });
+  const columns = [
+    { idColumn: "todos", title: "ToDo's", tasks: grouped.todo },
+    {
+      idColumn: "pending",
+      title: "Pendientes",
+      tasks: grouped.pending,
+    },
+    {
+      idColumn: "progress",
+      title: "En progreso",
+      tasks: grouped.progress,
+    },
+    { idColumn: "done", title: "Completado", tasks: grouped.done },
+  ];
 
-  createTaskCard(pendingList, {
-    title: "Render dinámico",
-    description: "Mostrar tareas desde JavaScript",
-    createdAt: "Hace 1 día",
-    priority: "media",
-  });
-
-  createTaskCard(progressList, {
-    title: "Topbar",
-    description: "Ajustar alineación y espaciado",
-    createdAt: "Hace 3 horas",
-    priority: "baja",
-  });
-
-  createTaskCard(doneList, {
-    title: "Estructura inicial",
-    description: "Separación por módulos completada",
-    createdAt: "Hoy",
-    priority: "baja",
-  });
+  columns.forEach((column) => createkanbanColumn(element, column));
 };

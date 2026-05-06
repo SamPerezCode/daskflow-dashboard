@@ -25,7 +25,7 @@
 
 .task-card__priority {
   display: inline-block;
-  border-radius: 999px;
+  border-radius: 10px;
   padding: 3px 8px;
   font-size: 12px;
   text-transform: capitalize;
@@ -42,6 +42,53 @@
 }
 
 .task-card__priority--baja {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+/* --------PRACTICA------ */
+
+.card-task {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  color: var(--text-main);
+}
+
+.createdAt {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.description {
+  color: var(--text-muted);
+}
+
+.task-priority {
+  display: inline-block;
+  border-radius: 10px;
+  font-size: 12px;
+  padding: 5px 8px;
+  text-transform: capitalize; /*inical mayuscula*/
+}
+
+.task-priority-alta {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.task-priority-media {
+  background-color: rgba(234, 179, 8, 0.2);
+  color: #facc15;
+}
+
+.task-priority-baja {
   background: rgba(34, 197, 94, 0.2);
   color: #4ade80;
 }
