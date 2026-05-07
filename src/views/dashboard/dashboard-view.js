@@ -4,6 +4,7 @@ import { createTopbar } from "../../components/topbar/topbar.js";
 import {
   createTask,
   getTasks,
+  updateTaskStatus,
 } from "../../services/tasks.service.js";
 import "../dashboard/dashboard-view.css";
 
@@ -12,16 +13,11 @@ export const createDashboard = async (element) => {
     <aside class="sidebar" id="sidebar">Sidebar</aside>
     <main class="container-main">
       <header>
-      <div class="topbar">
-      </div>
+        <div class="topbar"></div>
       </header>
-      <div class='container-board'>
-      </div>
+      <div class="container-board"></div>
     </main>
   `;
-
-  const tasks = await getTasks();
-  console.log(tasks);
 
   const sidebarAside = element.querySelector("#sidebar");
   const topbar = element.querySelector(".topbar");
@@ -35,7 +31,11 @@ export const createDashboard = async (element) => {
 
   const renderBoard = async () => {
     const tasks = await getTasks();
-    createBoard(board, tasks);
+
+    createBoard(board, tasks, async (id, nextStatus) => {
+      await updateTaskStatus(id, nextStatus);
+      await renderBoard();
+    });
   };
 
   await renderBoard();

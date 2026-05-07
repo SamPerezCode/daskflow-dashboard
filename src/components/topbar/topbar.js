@@ -14,20 +14,36 @@ export const createTopbar = (element, onCreateTask) => {
       <h3 class="topbar-title">Everything</h3>
 
       <form id="form-task">
-        <span>Nueva Tarea</span>
+        <div>
+          <span>Nueva Tarea</span>
+        </div>
 
-        <label for="titleTask">Título</label>
-        <input id="titleTask" type="text" name="titleTask" placeholder="Nombre de tarea" />
+        <div class="container-inputs">
+          <div class="div-forms">
+            <label for="titleTask">Título de la Tarea</label>
+            <input id="titleTask" type="text" name="titleTask" placeholder="Nombre de tarea" />
+          </div>
 
-        <label for="statusTask">Estado</label>
-        <select id="statusTask" name="status">
-          <option value="todo">ToDo</option>
-          <option value="pending">Pendiente</option>
-          <option value="progress">En progreso</option>
-          <option value="done">Completado</option>
-        </select>
+          <div class="div-forms">
+            <label for="description">Descripción</label>
+            <input id="description" name="description" type="text" placeholder="Descripción de la tarea"/>
+          </div>
 
-        <button type="submit">Agregar</button>
+          <div class="div-forms">
+            <label for="statusTask">Estado</label>
+            <select id="statusTask" name="status">
+              <option value="todo">ToDo</option>
+              <option value="pending">Pendiente</option>
+              <option value="progress">En progreso</option>
+              <option value="done">Completado</option>
+            </select>
+          </div>
+
+          <div class="div-forms">
+            <button type="submit">Agregar</button>
+          </div>
+
+         </div>
       </form>
     </div>
 
@@ -49,15 +65,39 @@ export const createTopbar = (element, onCreateTask) => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    // Con FormData: La forma moderna más escalable
     const formData = new FormData(form);
     const title = String(formData.get("titleTask") ?? "").trim();
+    const description = String(
+      formData.get("description") ?? ""
+    ).trim();
     const status = String(formData.get("status") ?? "todo");
 
-    if (!title) return;
+    if (!title || !description) return;
 
-    await onCreateTask?.({ title, status });
+    await onCreateTask?.({ title, description, status });
     form.reset();
 
-    console.log(title, status);
+    console.log({ title, description, status });
+
+    // Forma manual: Recomanda para form pequeños
+    // const titleInput = form.querySelector("[name='titleTask']");
+    // const inputDescription = form.querySelector(
+    //   "[name='description']"
+    // );
+    // const statusSelect = form.querySelector("[name='status']");
+
+    // if (!titleInput || !inputDescription || !statusSelect) return;
+
+    // const title = titleInput.value.trim();
+    // const description = inputDescription.value;
+    // const status = statusSelect.value;
+
+    // if (!title) return;
+
+    // await onCreateTask({ title, description, status });
+
+    // form.reset();
+    // console.log({title, description, status});
   });
 };

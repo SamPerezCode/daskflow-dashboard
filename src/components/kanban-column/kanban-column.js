@@ -3,9 +3,10 @@ import "./kanban-column.css";
 
 /**
  * @param {HTMLElement} element
- * @param {{ idColumn: string, title: string, tasks: Array<{ title: string, description: string, createdAt: string, priority: "alta" | "media" | "baja" }> }} data
+ * @param {{ idColumn: string, title: string, tasks: Array<{ id: string, title: string, description: string, createdAt: string, priority: "alta" | "media" | "baja", status: "todo" | "pending" | "progress" | "done" }> }} data
+ * @param {(id: string, status: "todo" | "pending" | "progress" | "done") => Promise<void> | void} onStatusChange
  */
-export const createkanbanColumn = (element, data) => {
+export const createkanbanColumn = (element, data, onStatusChange) => {
   const section = document.createElement("section");
   section.className = "column";
   section.id = data.idColumn;
@@ -17,13 +18,16 @@ export const createkanbanColumn = (element, data) => {
     </header>
     <div class="cards-list"></div>
   `;
-  const list = section.querySelector(".cards-list");
-  if (!list) throw new Error("No se encontró .card-list");
 
-  data.tasks.forEach((task) => createTaskCard(list, task));
+  const list = section.querySelector(".cards-list");
+  if (!list) throw new Error("No se encontró .cards-list");
+
   if (data.tasks.length === 0) {
-    list.innerHTML = `
-      <p class="column-empty">Sin tareas</p>`;
+    list.innerHTML = `<p class="column-empty">Sin tareas</p>`;
+  } else {
+    data.tasks.forEach((task) =>
+      createTaskCard(list, task, onStatusChange)
+    );
   }
 
   element.append(section);

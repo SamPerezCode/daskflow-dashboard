@@ -1,5 +1,6 @@
 import { taskFetch } from "./api-client";
 
+const url = `${import.meta.env.VITE_BASE_URL}`;
 /**
  *
  * @returns {Promise<{ title: string, description: string, createdAt: string, priority: "alta" | "media" | "baja" }[]>}
@@ -9,23 +10,27 @@ export const getTasks = async () => {
   return tasks;
 };
 
+/**
+ *
+ * @param {Object} task
+ * @returns
+ */
 export const createTask = async (task) => {
-  const url = `${import.meta.env.VITE_BASE_URL}`;
-  const normalicedTask = {
+  const normalizedTask = {
     title: (task?.title ?? "").trim(),
     description: (task?.description ?? "").trim(),
     status: task?.status ?? "todo",
     priority: task?.priority ?? "media",
-    createdAt: new Date.toISOString().slice(0, 10),
+    createdAt: new Date().toISOString().slice(0, 10),
   };
 
-  if (!normalicedTask.title) {
+  if (!normalizedTask.title) {
     throw new Error("El titulo es obligatorio");
   }
 
   const res = await fetch(url, {
     method: "POST",
-    body: JSON.stringify(normalicedTask),
+    body: JSON.stringify(normalizedTask),
     headers: {
       "Content-Type": "application/json",
     },
@@ -34,6 +39,20 @@ export const createTask = async (task) => {
 
   const newTask = await res.json();
   return newTask;
+};
+
+export const updateTaskStatus = async (id, status) => {
+  const res = await fetch(`${url}/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) throw new Error("Error en la actualización");
+
+  return await res.json();
 };
 
 /*

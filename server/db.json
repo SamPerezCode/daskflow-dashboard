@@ -12,7 +12,7 @@
       "id": "2",
       "title": "Crear render dinámico",
       "description": "Pintar las tareas desde JavaScript usando map",
-      "status": "progress",
+      "status": "done",
       "priority": "media",
       "createdAt": "2026-04-30"
     },
@@ -23,6 +23,39 @@
       "status": "done",
       "priority": "baja",
       "createdAt": "2026-04-30"
+    },
+    {
+      "title": "Barrer",
+      "description": "",
+      "status": "todo",
+      "priority": "media",
+      "createdAt": "2026-05-06",
+      "id": "4ODM95VNZz8"
+    },
+    {
+      "title": "Limpiar casa",
+      "description": "",
+      "status": "todo",
+      "priority": "media",
+      "createdAt": "2026-05-06",
+      "id": "tILEjz__XYA"
+    },
+    {
+      "title": "tarea con description",
+      "description": "Prueba de descripción para la tarea",
+      "status": "todo",
+      "priority": "media",
+      "createdAt": "2026-05-06",
+      "id": "8KwL0yND-M0"
+    },
+    {
+      "title": "Segunda tarea de prueba",
+      "description": "Prueba descripción 2",
+      "status": "done",
+      "priority": "media",
+      "createdAt": "2026-05-06",
+      "id": "M7MlunYgwMs"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

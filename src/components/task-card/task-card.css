@@ -46,6 +46,24 @@
   color: #4ade80;
 }
 
+.task-status-select {
+  margin-top: 10px;
+  width: 100%;
+  background: #0f172a;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.task-status-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
 /* --------PRACTICA------ */
 
 .card-task {

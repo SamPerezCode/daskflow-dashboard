@@ -1,7 +1,12 @@
 import "./board.css";
 import { createkanbanColumn } from "../kanban-column/kanban-column.js";
 
-export const createBoard = (element, tasks = []) => {
+/**
+ * @param {HTMLElement} element
+ * @param {Array<{ id: string, title: string, description: string, createdAt: string, priority: "alta" | "media" | "baja", status: "todo" | "pending" | "progress" | "done" }>} tasks
+ * @param {(id: string, status: "todo" | "pending" | "progress" | "done") => Promise<void> | void} onStatusChange
+ */
+export const createBoard = (element, tasks = [], onStatusChange) => {
   element.innerHTML = "";
 
   const grouped = {
@@ -33,5 +38,7 @@ export const createBoard = (element, tasks = []) => {
     { idColumn: "done", title: "Completado", tasks: grouped.done },
   ];
 
-  columns.forEach((column) => createkanbanColumn(element, column));
+  columns.forEach((column) =>
+    createkanbanColumn(element, column, onStatusChange)
+  );
 };
